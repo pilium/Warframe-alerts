@@ -2,8 +2,8 @@ const path = require('path');
 const fs = require('fs');
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const autoprefixer = require('autoprefixer');
+// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
  
 const isDevelopment = !process.env.production;
 const assetsPath = path.join(__dirname, '/public');
@@ -40,6 +40,17 @@ const config = {
                         loader: 'css-loader',
                         options: {
                             minimize: !isDevelopment
+                        }
+                    },
+                    {
+                        loader: 'postcss-loader',
+                        options: {
+                            plugins: [
+                                autoprefixer({
+                                    browsers:['ie >= 8', 'last 4 version']
+                                })
+                            ],
+                            sourceMap: true
                         }
                     },
                     'sass-loader',
