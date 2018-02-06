@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Webpack starter</title>
+    <script>
+        window.addEventListener('DOMContentLoaded', preloaderShow, false);
+        window.addEventListener('load', preloaderHide);
+
+        function preloaderShow() {
+            document.querySelector('html').style.height = "100%";
+            document.body.style.height = "100%";
+            document.body.style.opacity = 0;
+
+
+            var preloader = document.createElement('div');
+            var loaderWrapper = document.querySelector('.loader');
+            preloader.classList.add('preloader');
+            preloader.style.height = "100%";
+            preloader.style.width = "100%";
+            preloader.style.top = 0;
+            preloader.style.left = 0;
+            preloader.style.background = '#000';
+            preloader.style.position = "fixed";
+            preloader.style.zIndex = 1000;
+            preloader.appendChild(loaderWrapper)
+            document.body.insertBefore(preloader, document.body.firstChild);
+            document.body.style.opacity = 1;
+        }
+        function preloaderHide() {
+            setTimeout(() => {
+                
+                document.body.removeChild(document.querySelector('.preloader'));
+            }, 2000);
+
+        }
+    </script>
+    <style>
+    .loader {
+        position: relative;
+        top: 80%;
+        left: calc(50% - 10px);
+        width: 20px;
+        height: 20px;
+    }
+    .loader s:nth-child(2) {
+        top: calc(50% - 10px);
+        left: calc(50% - 10px);
+        border: 4px solid white;
+        transform: rotate(45deg);
+        animation: centerSpin 1.5s infinite ease;
+        background-image: radial-gradient(circle, white 40%, transparent 45%);
+        background-size: 50%;
+        background-repeat: no-repeat;
+        background-position: 50%;
+    }
+    .loader s {
+        display: inline-block;
+        position: absolute;
+        height: 20px;
+        width: 20px;
+    }
+    .loader s:first-child, .loader s:last-child {
+        top: 5px;
+        height: 15px;
+        width: 15px;
+    }
+    .loader s:first-child {
+        border-left: 4px solid white;
+        border-top: 4px solid white;
+        transform: rotate(-45deg);
+        left: -15px;
+        animation: leftMove 0.375s infinite ease;
+    }
+    .loader s:last-child {
+        border-right: 4px solid white;
+        border-bottom: 4px solid white;
+        transform: rotate(-45deg);
+        right: -23px;
+        animation: rightMove 0.375s infinite ease;
+    }
+    
+    @keyframes centerSpin {
+        0% {
+        transform: rotate(135deg);
+        }
+        25% {
+        transform: rotate(225deg);
+        }
+        50% {
+        transform: rotate(315deg);
+        }
+        75% {
+        transform: rotate(405deg);
+        }
+        100% {
+        transform: rotate(495deg);
+        }
+    }
+    @keyframes leftMove {
+        0% {
+        left: -15px;
+        }
+        50% {
+        left: -25px;
+        }
+        100% {
+        left: -15px;
+        }
+    }
+    @keyframes rightMove {
+        0% {
+        right: -15px;
+        }
+        50% {
+        right: -25px;
+        }
+        100% {
+        right: -15px;
+        }
+    }  
+    </style>
+    <link rel="stylesheet" type="text/css" href="main.css">
+    <style>
+    body {
+        opacity: 0;
+        overflow-x: hidden;
+    }</style>
+    <script src="bundle.js" defer></script>
+</head>
+
+<body>
+    <div class="loader">
+        <s></s>
+        <s></s>
+        <s></s>
+    </div>
+    <div class="main-wrapper">
+        <div class="bg-image"></div>
+        <main class="cd-main">
+            <ul class="cd-gallery">
+                <li class="cd-item">
+                    <a href="#">
+                        <div>
+                            <h2>Алерты</h2>
+
+                            <ul class="alerts-preview-list">
+
+                            </ul>
+                            <button class="more" data-type="alerts">Подробнее</button>
+                        </div>
+                    </a>
+                </li>
+
+                <li class="cd-item">
+                    <a href="#" data-type="sorties">
+                        <div>
+                            <h2>Вылазка</h2>
+                            <p class="sorties-date"></p>
+                            <ul class="sorties-preview-list">
+
+                            </ul>
+                            <button class="more" data-type="sorties">Подробнее</button>
+                        </div>
+                    </a>
+                </li>
+
+                <li class="cd-item">
+                    <a href="#" data-type="breach">
+                        <div>
+                            <h2>Разломы</h2>
+                            <ul class="breach-preview-list">
+
+                            </ul>
+                            <button class="more" data-type="breach">Подробнее</button>
+                        </div>
+                    </a>
+
+                </li>
+            </ul>
+            <!-- .cd-gallery -->
+        </main>
+        <!-- .cd-main -->
+
+        <div class="cd-folding-panel">
+
+            <div class="fold-left"></div>
+            <!-- this is the left fold -->
+
+            <div class="fold-right"></div>
+            <!-- this is the right fold -->
+
+            <div class="cd-fold-content">
+                <!-- content will be loaded using javascript -->
+            </div>
+
+            <a class="cd-close" href="#0"></a>
+        </div>
+        <!-- .cd-folding-panel -->
+
+        <div id="js-cetus-cycle" class="cetuc-cycle">
+            <span id="poe_timer_text"></span>
+        </div>
+
+    </div>
+</body>
+
+</html>
