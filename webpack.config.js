@@ -14,8 +14,9 @@ const extractSass = new ExtractTextPlugin({
 });
 
 const config = {
-    entry: 
-    ['babel-polyfill', './src/js/index.js'],
+    entry:  {
+        main:  './src/js/index.js'
+    },
     output: {
         filename: 'bundle.js',
         path: path.resolve(__dirname, 'public')

@@ -1,4 +1,4 @@
-
+import { compareTierNum } from "./../helpers/sortFunc.js";
 import { getData } from "./getDataFromAPI.js";
 let getAPIData = new getData();
 let data = getAPIData.fetch().then(function(result) {
@@ -20,19 +20,17 @@ function setDataFromApi(data) {
             p1 = document.createElement('p'),
             p2 = document.createElement('p'),
             p3 = document.createElement('p'),
-            p4 = document.createElement('p'),
             p5 = document.createElement('p');
         p1.innerHTML = `${alert.mission.type}`; 
         p2.innerHTML = `${alert.mission.faction}`;
         p3.innerHTML = `${alert.mission.reward.asString}`;
-        // p4.innerHTML = `Уровни: ${alert.mission.minEnemyLevel}  -  ${alert.mission.maxEnemyLevel}`;
+       
         p5.innerHTML = `${alert.eta}`;
         
 
         li.appendChild(p1);
         li.appendChild(p2);
         li.appendChild(p3);
-        // li.appendChild(p4);
         li.appendChild(p5);
         
         alertsPreviewList.appendChild(li);
@@ -59,6 +57,7 @@ function setDataFromApi(data) {
     sortiesPreviewList.appendChild(li);
     
     // BREACHES
+    breaches.sort(compareTierNum);
     breaches.forEach((breach) => {
         let li = document.createElement('li'),
             p1 = document.createElement('p'),
