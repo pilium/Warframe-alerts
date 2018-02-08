@@ -1,0 +1,59 @@
+.cd-item
+  position: relative
+  width: 100%
+  padding: 10px
+  text-align: center
+  transform: translateZ(0)
+  backface-visibility: hidden
+  transition: transform 0.5s 0.4s
+  div
+    h2
+      font-size: 30px
+      color: #034488
+    .sorties-date
+      font-size: 20px
+      font-style: italic
+      font-weight: 700
+      color: #178fd6
+  ul.alerts-preview-list,
+  ul.sorties-preview-list,
+  ul.breach-preview-list
+    display: block
+    height: auto
+    overflow: auto
+    li
+      display: flex
+      justify-content: space-around
+      align-items: center
+      width: 90%
+      margin: 10px auto
+      padding: 10px 20px
+      background-color: rgba(0, 0, 0, .2)
+      p
+        color: #ccdde8
+        font-size: 16px
+        width: 150px
+        &:last-child
+          font-style: italic
+  
+  &:nth-of-type(1)
+    background-color: rgba(39, 206, 44, 0.1)
+  &:nth-of-type(2)
+    background-color: rgba(25, 68, 146, 0.1)
+  &:nth-of-type(3)
+    background-color: rgba(168, 239, 31, 0.06)
+
+@media only screen and (min-width: 1100px)
+  .cd-item
+    width: 90%
+    margin: 0 auto 20px
+    transition: transform 0.5s 0.4s
+    
+  .fold-is-open .cd-item
+    transition: transform 1s 0s
+    transform: translateX(-300px)
+    &:nth-of-type(2n)
+      transform: translateX(300px)
+  .fold-is-open .cd-gallery
+    opacity: 0
+    transition: opacity 1s ease

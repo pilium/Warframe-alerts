@@ -1,0 +1,46 @@
+.cd-fold-content
+  position: absolute
+  top: 0
+  left: 0
+  height: 100%
+  width: 100%
+  padding: 4em 2em
+  color: #000
+  visibility: hidden
+  transition: visibility 0s 0.4s
+  > *
+    opacity: 0
+    transform: translateY(20px)
+
+  .fold-content__list
+    width: 90%
+    margin: 0 auto
+    li
+      display: flex
+      justify-content: space-between
+      align-items: center
+      height: 100px
+    img
+      width: 130px
+
+.is-open .cd-fold-content
+  overflow-y: auto
+  -webkit-overflow-scrolling: touch
+  visibility: visible
+  transition: visibility 0s 0.5s
+  > *
+    opacity: 1
+    transform: translateY(0)
+
+@media only screen and (min-width: 600px)
+  .cd-fold-content h2
+    font-size: 3.2rem
+
+@media only screen and (min-width: 1100px)
+  .cd-fold-content
+    padding: 4em
+    box-shadow: 0px 0px 50px rgba(0, 0, 0, 1)
+    > *
+      transform: translateY(40px)
+    p
+      font-size: 1.6rem

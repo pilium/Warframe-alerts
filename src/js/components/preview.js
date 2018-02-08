@@ -27,7 +27,7 @@ function setDataFromApi(data) {
        
         p5.innerHTML = `${alert.eta}`;
         
-
+        
         li.appendChild(p1);
         li.appendChild(p2);
         li.appendChild(p3);
