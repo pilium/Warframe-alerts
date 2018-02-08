@@ -9,7 +9,7 @@ function ftime(s) {
 
     return result
 }
-
+debugger;
 var isDay = false
 document.getElementById('js-cetus-cycle').style.background = "url('img/moon.png') left center no-repeat";
 function poeCycle() {
