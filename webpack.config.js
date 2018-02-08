@@ -87,7 +87,7 @@ const config = {
     },
     devtool: "cheap-source-map",
     plugins: [
-        extractSass
+        extractSass,
         // new BundleAnalyzerPlugin()
     ],
     devServer: {
