@@ -13,14 +13,13 @@ const myInit = {
 };
 
 export class getData {
-    
     fetch() {
         var data = fetch('https://ws.warframestat.us/pc', myInit)
         .then(status)
         .then((data) => data.json())
         .catch((error) => {
             console.log('error', error)
-          })
+    })
     return data;
     }
 }

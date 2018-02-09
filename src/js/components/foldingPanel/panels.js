@@ -124,7 +124,6 @@ function addContent(data) {
 				
 			}
 			return foldingContent
-			
 		}
 	}
 }
