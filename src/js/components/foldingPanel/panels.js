@@ -1,8 +1,10 @@
 import { getData } from "./../getDataFromAPI.js";
+
 let getIData = new getData();
 getIData.fetch().then(function(result) {
     addContent(result);
- })
+ });
+
 function addContent(data) {
 	const foldingContent = document.querySelector('.cd-fold-content');
 
@@ -91,7 +93,6 @@ function addContent(data) {
 				foldingContent.appendChild(ul);
 				
 			} else if(url === 'sorties') {
-				let sorties = data.sortie;
 				let missions = data.sortie.variants;
 				const ul = document.createElement('ul');
 				ul.classList.add('folding-panel--list');

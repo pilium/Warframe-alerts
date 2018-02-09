@@ -1,9 +1,9 @@
 import { compareTierNum } from "./../helpers/sortFunc.js";
 import { getData } from "./getDataFromAPI.js";
+
 let getAPIData = new getData();
 let data = getAPIData.fetch().then(function(result) {
     setDataFromApi(result);
-    console.log(result.alerts[0].eta)
  })
 
 function setDataFromApi(data) {
@@ -14,24 +14,24 @@ function setDataFromApi(data) {
     let alerts = data.alerts;
     let sorties = data.sortie;
     let breaches = data.fissures;
-
+    
     alerts.forEach((alert) => {
         let li = document.createElement('li'),
             p1 = document.createElement('p'),
             p2 = document.createElement('p'),
             p3 = document.createElement('p'),
-            p5 = document.createElement('p');
+            p4 = document.createElement('p');
         p1.innerHTML = `${alert.mission.type}`; 
         p2.innerHTML = `${alert.mission.faction}`;
         p3.innerHTML = `${alert.mission.reward.asString}`;
        
-        p5.innerHTML = `${alert.eta}`;
+        p4.innerHTML = `${alert.eta}`;
         
         
         li.appendChild(p1);
         li.appendChild(p2);
         li.appendChild(p3);
-        li.appendChild(p5);
+        li.appendChild(p4);
         
         alertsPreviewList.appendChild(li);
     });
