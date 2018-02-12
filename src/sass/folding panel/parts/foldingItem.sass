@@ -17,7 +17,9 @@
       color: #178fd6
   ul.alerts-preview-list,
   ul.sorties-preview-list,
-  ul.breach-preview-list
+  ul.breach-preview-list,
+  ul.baro-preview-list,
+  ul.content
     display: block
     height: auto
     overflow: auto
@@ -35,6 +37,9 @@
         width: 150px
         &:last-child
           font-style: italic
+      .sorties-variants,
+      .baro-location
+        width: auto
   
   &:nth-of-type(1)
     background-color: rgba(39, 206, 44, 0.1)
@@ -42,6 +47,8 @@
     background-color: rgba(25, 68, 146, 0.1)
   &:nth-of-type(3)
     background-color: rgba(168, 239, 31, 0.06)
+  &:nth-of-type(4)
+    background-color: rgba(25, 68, 146, 0.1)
 
 @media only screen and (min-width: 1100px)
   .cd-item
