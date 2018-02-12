@@ -6,7 +6,7 @@ function poeCycle() {
     var poeTimerText = document.getElementById('poe_timer_text');
     var cetusCycle = document.getElementById('js-cetus-cycle');
 
-    var now = Date.now() / 1000 + (21 * 60 - 25)
+    var now = Date.now() / 1000 + (22 * 60 - 10)
     var timeThing = 8999.999421
     var localTime = ((24 * (now % timeThing) / timeThing) + 18) % 24
 
