@@ -16,13 +16,13 @@ function poeCycle() {
     if (localTime < 16) {
         if (!isDay) {
             isDay = true
-            cetusCycle.style.background = "url('img/sun.png') left center no-repeat";
+            cetusCycle.style.background = "url('img/sun.png') center no-repeat";
         }   
         poeTimerText.innerHTML = tDay;
     } else {
         if (isDay) {
             isDay = false
-            cetusCycle.style.background = "url('img/moon.png') left center no-repeat";
+            cetusCycle.style.background = "url('img/moon.png') center no-repeat";
         }
         poeTimerText.innerHTML = tNight;
     }
