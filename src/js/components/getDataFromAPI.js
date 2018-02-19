@@ -1,22 +1,24 @@
 import { compareTierNum } from "./../helpers/sortFunc.js";
 import ftime from  "../helpers/ftime.js";
 
-const status = function (response) {
-    if (response.status !== 200) {
-      return Promise.reject(new Error(response.statusText))
-    }
-    return Promise.resolve(response)
-  }
 
-const myInit = {
-    method: 'GET',
-    mode: 'cors',
-    cache: 'default',
-    data: 'JSON'
-};
 
 function getData() {
-        var data = fetch('https://ws.warframestat.us/pc', myInit)
+        const status = function (response) {
+            if (response.status !== 200) {
+            return Promise.reject(new Error(response.statusText))
+            }
+            return Promise.resolve(response)
+        }
+        
+        const myInit = {
+            method: 'GET',
+            mode: 'cors',
+            cache: 'default',
+            data: 'JSON'
+        };
+
+        let data = fetch('https://ws.warframestat.us/pc', myInit)
         .then(status)
         .then((data) => data.json())
         .catch((error) => {
@@ -24,6 +26,8 @@ function getData() {
         });
     return data;
 }
+
+
 const alertsPreviewList = document.querySelector('.alerts-preview-list');
 
 const sortiesPreviewList = document.querySelector('.sorties-preview-list');
@@ -44,21 +48,21 @@ const baroBtn = document.querySelector('a.trigger');
 var timer = setTimeout(function tick() {
 let getAPIData = getData();
 
-getAPIData.then(function get(data) {    
-    while (alertsPreviewList.firstChild) {
-        alertsPreviewList.removeChild(alertsPreviewList.firstChild)
+getAPIData.then(function get(data) {   
+    while (alertsPreviewList.lastChild) {
+        alertsPreviewList.removeChild(alertsPreviewList.lastChild)
     }
-    while (sortiesPreviewList.firstChild) {
-        sortiesPreviewList.removeChild(sortiesPreviewList.firstChild)
+    while (sortiesPreviewList.lastChild) {
+        sortiesPreviewList.removeChild(sortiesPreviewList.lastChild)
     }
-    while (breachPreviewList.firstChild) {
-        breachPreviewList.removeChild(breachPreviewList.firstChild)
+    while (breachPreviewList.lastChild) {
+        breachPreviewList.removeChild(breachPreviewList.lastChild)
     }
-    while (baroPreviewList.firstChild) {
-        baroPreviewList.removeChild(baroPreviewList.firstChild)
+    while (baroPreviewList.lastChild) {
+        baroPreviewList.removeChild(baroPreviewList.lastChild)
     }
-    while (baroInvetary.firstChild) {
-        baroInvetary.removeChild(baroInvetary.firstChild)
+    while (baroInvetary.lastChild) {
+        baroInvetary.removeChild(baroInvetary.lastChild)
     }
     
     let alerts = data.alerts;
@@ -68,27 +72,8 @@ getAPIData.then(function get(data) {
 
     
     alerts.forEach((alert) => {
-        let li = document.createElement('li'),
-            p1 = document.createElement('p'),
-            p2 = document.createElement('p'),
-            p3 = document.createElement('p'),
-            p4 = document.createElement('p');
-        
-        p1.innerHTML = `${alert.mission.type}`; 
-        p2.innerHTML = `${alert.mission.faction}`;
-        p3.innerHTML = `${alert.mission.reward.asString}`;    
-        let a = Date.parse(alert.expiry);
-
-        let eta = expiry(a);
-        p4.innerHTML = `${eta}`;
-
-        li.appendChild(p1);
-        li.appendChild(p2);
-        li.appendChild(p3);
-        li.appendChild(p4);
-
-        alertsPreviewList.appendChild(li);
-
+        let done = createItem(alert.mission.type, alert.mission.faction, alert.mission.reward.asString, alert.expiry);
+        alertsPreviewList.appendChild(done);
     });
 
     // Sortie
@@ -108,26 +93,8 @@ getAPIData.then(function get(data) {
     // BREACHES
     breaches.sort(compareTierNum);
     breaches.forEach((breach) => {
-        let li = document.createElement('li'),
-            p1 = document.createElement('p'),
-            p2 = document.createElement('p'),
-            p3 = document.createElement('p'),
-            p4 = document.createElement('p');
-
-    p1.innerHTML = `${breach.enemy}`; 
-    p2.innerHTML = `${breach.missionType}`;
-    p3.innerHTML = `${breach.tier}`;
-    let b = Date.parse(breach.expiry);
-    let eta = expiry(b);
-    p4.innerHTML = eta;
-    li.dataset.sort = `${breach.tierNum}`; 
-
-
-    li.appendChild(p1);
-    li.appendChild(p2);
-    li.appendChild(p3);
-    li.appendChild(p4);
-    breachPreviewList.appendChild(li);
+    let done = createItem(breach.enemy,breach.missionType, breach.tier, breach.expiry);
+    breachPreviewList.appendChild(done);
     });
 
     //Baro       
@@ -163,8 +130,7 @@ getAPIData.then(function get(data) {
    
     baroPreviewList.appendChild(baroItem);
     
-    
-    
+
 function expiry(ex) {
     let now = Date.now() /1000;
     let expiry = ex / 1000;
@@ -174,6 +140,58 @@ function expiry(ex) {
 
     return b
     
+}
+function createElement(tag, props, ...children) {
+    const element = document.createElement(tag);
+
+    Object.keys(props).forEach(key => (element[key] = props[key]));
+
+    console.log(tag, children);
+
+    if (children.length > 0) {
+      children.forEach(child => {
+        if (typeof child === "string") {
+          child = document.createTextNode(child);
+        }
+
+        element.appendChild(child);
+      });
+    }
+
+    return element;
+  }
+  function createItem(item1, item2, item3, item4) {
+    let b = Date.parse(item4);
+    let eta = expiry(b);
+    const p1 = createElement(
+        "p",
+        {className: "alertsText"},
+        `${item1}`
+    );
+    const p2 = createElement(
+        "p",
+        {className: "alertsText"},
+        `${item2}`
+    );
+    const p3 = createElement(
+        "p",
+        {className: "alertsText"},
+        `${item3}`
+    );
+    const p4 = createElement(
+        "p",
+        {className: "alertsText"},
+        `${eta}`
+    );
+    const listItem = createElement(
+        "li",
+        { className: "todo-item" },
+        p1,
+        p2,
+        p3,
+        p4
+    );
+    return listItem;             
 }
  })
 
